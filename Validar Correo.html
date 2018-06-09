@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Validar Correo</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <form>
+            <h1>Email</h1>
+            <label>Correo electronico</label>
+            <input type="text" id="txt_correo" placeholder="Ingresa tu correo electronico">
+            <input type="button" value="Validar" id="btn_validar">
+        </form>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script>
+            $('#btn_validar').click(function(){
+                
+                var email = $('#txt_correo').val();
+                var expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                
+                if ( !expr.test(email) ){
+                    alert("El correo " + email + " es incorrecto.");
+                }else{
+                    alert('El correo '+ email +' es correcto');
+            }
+        });
+        </script>
+    </body>
+</html>

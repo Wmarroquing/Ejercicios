@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Agreaga campos</title>
+    <style>
+        body{
+            margin-top: 50px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #212529;
+            text-align: left;
+            background-color: #fff;
+        }
+        .contenedor{
+            max-width: 400px;
+            padding: 15px;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .input{
+            width: 100%;
+            height: 30px;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            margin-bottom: 1rem;
+        }
+        .input-lineal{
+            display: flex;
+        }
+        .seccion{
+            margin-bottom: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            margin-bottom: 1rem;
+        }
+        .enviar{
+            color: #007bff;
+            background-color: transparent;
+            background-image: none;
+            border-color: #007bff;
+        }
+        .eliminar{
+            color: #dc3545;
+            background-color: transparent;
+            background-image: none;
+            border-color: transparent;
+        }
+        .agregar{
+            color: #28a745;
+            background-color: transparent;
+            background-image: none;
+            border-color: #28a745;
+        }
+        .eliminar:hover{
+            border-color: #dc3545;
+        }
+        .agregar:hover{
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .enviar:hover{
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <center><h1>Formulario</h1></center>
+        <div>
+            <input type="text" class="input" id="nombre" placeholder="Ingresa tu usuario">
+            <input type="password" class="input" id="contra" placeholder="Ingresa tu contrasena">
+        </div>
+        <div class="seccion">
+            <h3>Interes</h3>
+            <label for="chk1">INT 1</label>
+            <input type="checkbox" value="INT1" id="chk1">
+            <label for="chk2">INT 2</label>
+            <input type="checkbox" value="INT2" id="chk2">
+            <label for="chk3">INT 3</label>
+            <input type="checkbox" value="INT3" id="chk3" disabled>
+            <label for="chk4">INT 4</label>
+            <input type="checkbox" value="INT4" id="chk4">
+            <br>
+            <label for="chk5">INT 5</label>
+            <input type="checkbox" value="INT5" id="chk5" disabled>
+            <label for="chk6">INT 6</label>
+            <input type="checkbox" value="INT6" id="chk6">
+            <label for="chk7">INT 7</label>
+            <input type="checkbox" value="INT7" id="chk7">
+            <label for="chk8">INT 8</label>
+            <input type="checkbox" value="INT8" id="chk8">
+        </div>
+        <input type="button" class="btn agregar" value="Agreagar interes" onclick="InteresesAgregar();">
+        <div id="contenedor_intereses"></div>
+        <div class="seccion">
+            <h3>Genero</h3>
+            <label for="rad_M">Masculino</label>
+            <input type="radio" value="1" name="genero" id="rad_M">
+            <br>
+            <label for="rad_F">Femenino</label>
+            <input type="radio" value="2" name="genero" id="rad_F">
+        </div>
+        <input type="button" class="btn enviar" id="enviar" value="Enviar" onclick="Validar();">
+    </div>
+
+    <script src="./jquery.min.js"></script>
+
+    <script>
+        $('input:radio[name=genero]:checked').val();
+        $('#rad_M').prop('checked', 'true');
+        $('#chk1').attr('checked');
+        $('#chk2').prop('checked', 'true');
+        $('#chk4').is(':checked')
+
+        var i = 1;
+
+        function InteresesAgregar() {
+            $('#contenedor_intereses').append('<div class="input-lineal"><input type="text" class="input" placeholder="Interes ' + i + '"><input type="button" class="btn eliminar" value="X" onclick="InteresEliminar(this);"></div>');
+            i++
+        }
+
+        function InteresEliminar(element) {
+            $(element).parent().remove();
+        }
+
+        function Validar() {
+            var nombre = $('#nombre').val();
+            var clave = $('#contra').val();
+            var genero = $('input:radio[name=genero]:checked').val();
+
+            if (nombre == "") {
+                alert('ingresa tu nombre');
+                return false;
+            }
+            if (clave == "") {
+                alert('ingresa tu clave');
+                return false;
+            }
+            if (genero == undefined) {
+                alert('selecciona tu genero');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

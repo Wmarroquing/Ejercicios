@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejercicio</title>
+    <meta charset="utf-8">
+    <style>
+        @font-face {
+            font-family: "MATURASC";
+            src: url(maturasc.ttf) format("TRUETYPE");
+        }
+
+        body {
+            padding: 100px;
+        }
+
+        div {
+            font-family: MATURASC;
+            border: 1px solid black;
+            text-align: center;
+            font-size: 35px;
+            border-radius: 50px;
+            margin-bottom: 5px;
+        }
+
+        .Desactivo {
+            color: red;
+            display: none;
+        }
+
+        .Activo {
+            display: block;
+        }
+
+        div:hover {
+            background: aqua;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div onclick="Validar(this);">Titulo 1</div>
+    <div class="Desactivo" id="Contenido1">Contenido 1</div>
+    <div onclick="Validar(this);">Titulo 2</div>
+    <div class="Desactivo" id="Contenido2">Contenido 2</div>
+    <div onclick="Validar(this);">Titulo 3</div>
+    <div class="Desactivo" id="Contenido3">Contenido 3</div>
+
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script>
+        function Validar(elemento) {
+            jQuery('.Desactivo').hide();
+            jQuery(elemento).next().show();
+        }
+    </script>
+</body>
+
+</html>

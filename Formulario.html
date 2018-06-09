@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>portafolio</title>
+        <meta charset="utf-8">
+        <style>
+                        
+            form{
+                background-color: cornflowerblue;
+                width: 300px;
+                height: 350px;
+                margin-top: 150px;
+                color: white;
+                border-radius: 50px;
+            }
+            
+            .enviar{
+                width: 77%;
+                height: 35px;
+                border-radius: 10px;
+            }
+            
+            .limpiar{
+                width: 77%;
+                height: 35px;
+                border-radius: 10px;
+            }
+            
+            input{
+                height: 25px;
+                width: 77%;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <center>
+            <form method="post" action="">
+                <br>
+                <center>
+                     <h1>Formulario</h1>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre..."><br><br>
+                    <input type="password" id="contra" name="contra" placeholder="Contraseña...">
+                    <br><br>
+                    <input type="button" value="Enviar" class="enviar" onclick="validar();">
+                    <br><br>
+                    <input type="button" value="Limpiar" class="limpiar" onclick="limpiar();">
+                </center>
+            </form>
+        </center>
+        
+        <script>
+                
+            
+            function limpiar(e){
+                
+                var nombre = document.getElementById('nombre');
+                var contra = document.getElementById('contra');
+                
+                nombre.value = "";
+                contra.value = "";
+            }
+            
+            function validar(e){
+                
+                var nombre = document.getElementById('nombre').value;
+                var contra = document.getElementById('contra').value;
+                var error = false;
+                var mensaje = '';
+                
+                
+                if(nombre.length  > 0){
+                    nombre = nombre.split(" ");
+                    for(var i = 0; i < nombre.length; i++){
+                        var code = nombre[i].charCodeAt(0);
+                        if(!(code >= 97 && code <= 122) || (code >= 65 && code <= 90) || (code == 32)){
+                            error = true;
+                            mensaje += 'Ingresa solo letras en tu nombre. ';
+                        }
+                    }
+                }else{
+                    error = true;
+                    mensaje += 'ingresa un nombre. '
+                }
+                
+                if(error == true){
+                    alert(mensaje);
+                }else{
+                    alert('Nombre correcto');
+                }
+                
+                var espacios = false;
+                var cont = 0;
+                
+                while(!espacios && (cont < contra.length)){
+                    if(contra.charAt(cont) == " "){
+                        espacios = true;
+                        cont++;
+                    }
+                    if(espacios){
+                        alert('la contraseña no puede contener espacios');
+                        return false;
+                    }
+                    if(contra.length >= 6){
+                        contra = contra.split(" ");
+                        for(var j =0; j <contra.length; j++){
+                            var clave = contra[j].charCodeAt(0);
+                            if(clave >= 97 && clave <= 122){
+                                if(clave >= 65 && clave <= 90){
+                                    if(clave >= 48 && clave <= 57){
+                                       alert('Contrasena correcta'); 
+                                    }else{
+                                        alert('Tienes que tener por lo menos un numero');
+                                    }
+                                }else{
+                                    alert('debes de tener por lo menos un numero');
+                                }
+                            }else{
+                                alert('debes de tener por lo menos una letra');
+                            }
+                        }
+                    }else{
+                        alert('La contrasena debe ser por lo menos 6 caracteres');
+                        return;
+                    }
+                }
+            } 
+        </script>   
+    </body>
+</html>

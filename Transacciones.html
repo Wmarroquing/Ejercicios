@@ -1,0 +1,346 @@
+<html>
+    <head>
+        <title>Transacciones</title>
+        <meta charset="utf-8">
+        <style>            
+            body {
+                background: #c1bdba;
+                font-family: 'Titillium Web', sans-serif;
+            }
+            .formulario{
+                color: white;
+                background:#13232f;
+                border: 1px solid black;
+                margin: auto;
+                padding: 20px;
+                text-align: center;
+                width: 500px;
+                height: 300px;
+                margin-top: 150px;
+                box-shadow: 0 0 20px 1px rgba(0,0,0,0.3);
+                border-radius: 5px;
+            }            
+            .boton{
+                color: white;
+                background-color: #1ab188;
+                width: 300px;
+                border: none;
+                height: 30px;
+            } 
+            div{
+                text-align: left;
+                width: 10%;
+                margin: auto;
+            }     
+            input[type=text]{
+                border: none;
+                width: 300px;   
+                height: 25px;
+                background-color: transparent;
+                border-bottom: solid #fff thin;
+                color: #fff;
+            }
+            
+            input[type=text]:hover{
+                border-bottom: solid #58AC60 thin;
+            }
+            }
+        </style>
+    </head>
+    <body>
+        <form method="post" action="" id="frm_bienvenida" class="formulario">
+            <h1>Bienvenido</h1>
+            <label>Seleccione una de las siguientes opciones:</label><br><br><br><br>
+            <input type="button" value="Crear Cuenta" class="boton" id="btn_crear"><br><br>
+            <input type="button" value="Log In" class="boton" id="btn_login">
+        </form>   
+        <form method="post" action="" id="frm_registro" class="formulario">
+            <h1>Registro</h1>
+            <label>Ingrese los siguientes datos para crear su cuenta:</label>
+            <br><br><br>
+            <input type="text" placeholder="Ingresa tu nombre" id="txt_nombre" class="texto">
+            <br><br>
+            <input type="text" placeholder="Ingresa tu DPI" id="txt_dpi" maxlength="13" class="texto">
+            <br><br>
+            <label>Cuenta:</label>
+            <label>Q</label>
+            <input type="radio" name="cuenta" value="0" checked>
+            <label>$</label>
+            <input type="radio" name="cuenta" value="1">
+            <br><br>
+            <input type="button" value="Crear" class="boton" id="btn_crearC">
+        </form>  
+        <form method="post" action="" id="frm_msgregistro" class="formulario">
+            <h1>Registro</h1><br><br>
+            <label>Tu cuenta ha sido creada exitosamente.<br><br> Tu PIN aleatorio es:</label><span id="spn_pin"></span><br><br><br>
+            <input type="button" value="Continuar" class="boton" id="btn_continuar">
+        </form>   
+        <form method="post" action="" id="frm_login" class="formulario">
+            <h1>Log In</h1>
+            <label>Ingresa tus credenciales para realizar operaciones:</label><br><br><br>
+            <input type="text" placeholder="Ingresa tu DPI" id="dpilog" maxlength="13"><br><br>
+            <input type="text" placeholder="Ingresa tu PIN" id="pinlog" maxlength="4"><br><br><br>
+            <input type="button" value="Ingresar" id="btn_ingresar" class="boton">
+        </form>   
+        <form method="post" action="" id="frm_operaciones" class="formulario">
+            <h1>Operaciones</h1>
+            <label>Seleccione una de las siguientes opciones:</label><br><br><br>
+            <input type="button" value="Depositar" class="boton" id="btn_depositar"><br><br>
+            <input type="button" value="Retirar" class="boton" id="btn_retirar"><br><br>
+            <input type="button" value="Log Out" class="boton" id="btn_salir">
+        </form> 
+        <form method="post" action="" id="frm_retiros" class="formulario">
+            <h1>Retiros</h1>
+            <label>Que monto desea retiar?</label><br><br><br>
+            <input type="text" placeholder="Ingrese la cantidad" id="txt_retiro"><br><br>
+            <input type="button" value="Retirar" class="boton" id="btn_retirarDinero">
+        </form>
+        <form method="post" action="" id="frm_msgretirosSI" class="formulario">
+            <h1>Retiros</h1>
+            <label>El retiro fue realizado correctamente.</label><br><br>
+            <label>Monto retirado: </label><span id="spn_retiro"></span><br><br>
+            <label>Saldo: </label><span id="spn_saldo"></span><br><br><br>
+            <input type="button" value="continuar" class="boton" id="btn_continuarRSI">
+        </form>
+        <form method="post" action="" id="frm_msgretirosNO" class="formulario">
+            <h1>Retiros</h1>
+            <label>No fue posible realizar el retiro. Por favor intenta mas tarde</label><br><br><br>
+            <input type="button" value="continuar" class="boton" id="btn_continuarRNO">
+        </form>
+        <form method="post" action="" id="frm_depositos" class="formulario">
+            <h1>Depositos</h1>
+            <label>Que monto desea depositar?</label><br><br><br>
+            <input type="text" placeholder="Ingrese la cantidad" id="txt_ingreso"><br><br>
+            <input type="button" value="Depositar" class="boton" id="btn_depositarDinero">
+        </form>
+        <form method="post" action="" id="frm_msgdepositosSI" class="formulario">
+            <h1>Depositos</h1>
+            <label>El deposito fue realizado correctamente.</label><br><br>
+            <label>Monto depositado: </label><span id="spn_ingreso"></span><br><br>
+            <label>Saldo: </label><span id="spn_saldoI"></span><br><br><br>
+            <input type="button" value="continuar" class="boton" id="btn_continuarDSI">
+        </form>
+        <form method="post" action="" id="frm_msgdepositosNO" class="formulario">
+            <h1>Depositos</h1>
+            <label>No fue posible realizar el deposito. Por favor intenta mas tarde</label><br><br><br>
+            <input type="button" value="continuar" class="boton" id="btn_continuarDSI">
+        </form>
+        
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                
+                var nombreglobal;
+                var dpiglobal;
+                var pinglobal;
+                var saldo = 100;
+                
+                $('#frm_registro').css('display','none');
+                $('#frm_msgregistro').css('display','none');
+                $('#frm_login').css('display','none');
+                $('#frm_operaciones').css('display','none');
+                $('#frm_retiros').css('display','none');
+                $('#frm_msgretirosSI').css('display','none');
+                $('#frm_msgretirosNO').css('display','none');
+                $('#frm_depositos').css('display','none');
+                $('#frm_msgdepositosSI').css('display','none');
+                $('#frm_msgdepositosNO').css('display','none');
+                
+                $('#btn_crear').click(function(){
+                    $('#frm_bienvenida').css('display','none');
+                    $('#frm_registro').css('display','block');
+                });
+                $('#btn_login').click(function(){
+                    $('#frm_bienvenida').css('display','none');
+                    $('#frm_login').css('display','block');
+                });
+                $('#btn_crearC').click(function(){
+                    var nombre = $('#txt_nombre').val();
+                    var dpi = $('#txt_dpi').val();
+                    var error = false;
+                    var mensaje = "";
+                    $('input:radio[name=cuenta]').val();
+                         
+                    if(nombre.length  > 0){
+                        nombre = nombre.split(" ");
+                        for(var i = 0; i < nombre.length; i++){
+                            var code = nombre[i].charCodeAt(0);
+                            if(!(code >= 65 && code <= 90) || (code >= 97 && code <= 122) || (code == 32)){
+                                error = true;
+                                mensaje += 'Ingresa solo letras en tu nombre. ';
+                        }
+                    }
+                }else{
+                    error = true;
+                    mensaje += 'Es necesario que ingreses tu nombre. ';
+                }
+                    
+                    if(dpi.length == 13){
+                        dpi = dpi.split(" ");
+                        for(var i = 0; i< dpi.length; i++){
+                            /*
+                            var cui = dpi[i].charCodeAt(0);
+                            if(!(cui >= 48 && cui <= 57)){
+                                error = true;
+                                mensaje += 'Ingresa solo numeros en tu DPI. ';
+                            }
+                            */
+                            
+                            if (isNaN(dpi[i]) == true) {
+                                error = true;
+                                mensaje += 'ingresa solo numeros en tu DPI.';
+                            }
+                            
+                        }
+                    }else if(dpi == ""){
+                        error = true;
+                        mensaje += 'Es necesario que ingreses tu DPI';
+                    }else{
+                        error = true;
+                        mensaje += 'ingresa un DPI valido';
+                    }
+                    
+                    if(error == true){
+                        alert(mensaje);
+                    }else{
+                        
+                        for(i=1; i<=10; i++){
+                            var pin = parseInt(Math.random()*10000);
+                        }
+                        
+                        $('#frm_registro').css('display','none');
+                        $('#frm_msgregistro').css('display','block');
+                        
+                        dpiglobal = dpi;
+                        pinglobal = pin;
+                        
+                        $('#spn_pin').append('<label>'+pinglobal+'</label>')
+                    }
+                });                
+                $('#btn_continuar').click(function(){
+                    $('#frm_msgregistro').css('display','none');
+                    $('#frm_login').css('display','block');
+                }); 
+                $('#btn_ingresar').click(function(){
+                    var dpilog = $('#dpilog').val();
+                    var pinlog = $('#pinlog').val();
+                    var error = false;
+                    var mensaje = "";
+                    var login = false;
+                    
+                    if(dpilog == dpiglobal && pinlog == pinglobal){
+                        login = true;
+                    }else{
+                        error = true;
+                        mensaje += 'DPI o PIN son incorrectos';
+                    }
+                    
+                    if(error == true){
+                        alert(mensaje);
+                    }else{
+                        $('#frm_login').css('display','none');
+                        $('#frm_operaciones').css('display','block');
+                    }  
+                });
+                $('#btn_depositar').click(function(){
+                    $('#frm_operaciones').css('display','none');
+                    $('#frm_depositos').css('display','block');
+                });    
+                $('#btn_retirar').click(function(){
+                    $('#frm_operaciones').css('display','none');
+                    $('#frm_retiros').css('display','block');
+                });    
+                $('#btn_salir').click(function(){
+                    $('#frm_operaciones').css('display','none');
+                    $('#frm_bienvenida').css('display','block');
+                    $('input[type="text"]').val('');
+                });    
+                $('#btn_retirarDinero').click(function(){
+                    var retiro = $('#txt_retiro').val();
+                    var error = false;
+                    var mensaje = "";
+                    
+                    if(retiro.length > 0){
+                        retiro = retiro.split(" ");
+                        for(var i = 0; i< retiro.length; i++){
+                            if (isNaN(retiro[i]) == true) {
+                                error = true;
+                                mensaje += 'ingresa solo numeros.';
+                            }
+                        }
+
+                    }else{
+                        error = true;
+                        mensaje += 'Ingresa una cantidad';
+                    } 
+                        
+                    if(retiro > saldo){
+                        error = true;
+                        mensaje += 'No dispones del saldo suficiente. ';
+                    }else{
+                        saldo = saldo - Number(retiro);
+                    }
+                    
+                    if(error == true){
+                        alert(mensaje);
+                    }else{
+                        $('#frm_retiros').css('display','none');
+                        $('#frm_msgretirosSI').css('display','block');
+                        $('#spn_retiro').append('<label>'+retiro+'</label>');
+                        $('#spn_saldo').append('<label>'+saldo+'</label>');
+                        $('input[type="text"]').val('');
+                    } 
+                });
+                $('#btn_depositarDinero').click(function(){
+                    var ingreso = $('#txt_ingreso').val();
+                    var error = false;
+                    var mensaje = "";
+                    
+                    if(ingreso.length > 0){
+                        ingreso = ingreso.split(" ");
+                        for(var i = 0; i< ingreso.length; i++){
+                            if (isNaN(ingreso[i]) == true) {
+                                error = true;
+                                mensaje += 'ingresa solo numeros.';
+                            }else{
+                                saldo = Number(saldo) + Number(ingreso);
+                            }
+                        }
+
+                    }else{
+                        error = true;
+                        mensaje += 'Ingresa una cantidad';
+                    } 
+                    
+                    if(error == true){
+                        alert(mensaje);
+                    }else{
+                        $('#frm_depositos').css('display','none');
+                        $('#frm_msgdepositosSI').css('display','block');
+                        $('#spn_ingreso').append('<label>'+ingreso+'</label>');
+                        $('#spn_saldoI').append('<label>'+saldo+'</label>');
+                        $('input[type="text"]').val('');
+                    } 
+                });
+                $('#btn_continuarRSI').click(function(){
+                     $('#frm_operaciones').css('display','block');
+                     $('#frm_msgretirosSI').css('display','none');
+                });
+                $('#btn_continuarRNO').click(function(){
+                     $('#frm_operaciones').css('display','block');
+                     $('#frm_msgretirosNO').css('display','none');
+                });
+                $('#btn_continuarDSI').click(function(){
+                     $('#frm_operaciones').css('display','block');
+                     $('#frm_msgdepositosSI').css('display','none');
+                });
+                $('#btn_continuarDNO').click(function(){
+                     $('#frm_operaciones').css('display','block');
+                     $('#frm_msgdepositosNO').css('display','none');
+                });
+            });
+        </script>
+    </body>
+</html>
+
+

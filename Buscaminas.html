@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<hmtl>
+    <head>
+        <title>Buscaminas</title>
+        <meta charset="utf-8">
+        <style>
+            
+@font-face {
+    
+    font-family: "PAPYRUS";
+    src: url(PAPYRUS.ttf) format("TRUETYPE");
+    
+}
+
+
+body{
+    margin: 0;
+    font-family: 'PAPYRUS';
+}
+            
+            .tablero{
+                margin-top: 150px;
+                width: 420px;
+                margin: auto;
+                height: 420px;
+                display: grid;
+            }
+            
+            img{
+                width: 100%;
+                height: 100%;
+            }
+            
+            .casilla, .info{
+                text-align: center;
+                width: 100%;
+                height: 100%;
+                border: 2px solid black;
+                background-color: ghostwhite;
+            }
+            
+            header, footer{
+                width: 420px;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                text-align: center;
+                background-color: black;
+                margin: auto;
+                margin-top: 45px;
+                color: white;
+            }
+            
+            .info{
+                font-size: 15px;
+                background-color: black;
+                padding-top: 4px;
+            }
+            
+            label{
+                padding-top: 8px;
+            }
+
+        </style>
+    </head>
+    
+    <body>
+       
+            <label>NickName</label>
+            <input type="text" class="input" id="nombre" placeholder="Ingresa tu usuario">
+            <label>Dificultad</label>
+            <select id="dificultad">
+                <option>Facil</option>
+                <option>Medio</option>
+                <option>Dificil</option>
+            </select>
+            <input type="button" id="jugar" value="Jugar">
+            
+           <!--<header>
+                <div class="info">
+                    <label>Usuario: </label>
+                    <label id="nickname"></label>
+                </div>
+                <div class="info">
+                    <label>Nivel: </label>
+                    <label></label>
+                </div>
+                <div class="info">
+                    <label>Dificultad: </label>
+                    <label id="dificult"></label>
+                </div> 
+            </header> -->
+            <div class="tablero" id="tablero"></div>
+            <!--<footer>
+                <div class="info">
+                    <label>Tiempo: </label>
+                    <span>0</span>:<span>00</span>
+                </div>
+                <div class="info">
+                    <input type="button" class="" value="Reiniciar">
+                </div>
+                <div class="info">
+                    <label>Puntos: </label>
+                    <label></label>
+                </div>
+            </footer>-->
+    
+        <script src="jquery.min.js"></script>
+        
+    <script>
+        $(document).ready(function(){
+            
+            $('#jugar').click(function(){
+            
+            var nombre = $("#nombre").val();
+            var dificultad = $('#dificultad').val();
+
+            $('#nickname').html(nombre);
+            $('#dificult').html(dificultad);
+            
+            var tablero ={
+                fila: 0,
+                columna: 0,
+                dificultad: 0,
+                piezas: [{
+                    activo: false,
+                    bomba: true,
+                    valor: 0 
+                }]
+            };
+            
+            var casillas = 0;
+                
+                if(dificultad == 'Facil'){
+                tablero.fila = 4;
+                tablero.columna = 4;
+                $('#tablero').css('grid-template-columns','1fr 1fr 1fr 1fr');
+            }else if(dificultad == 'Medio'){
+                tablero.fila = 6;
+                tablero.columna = 6;
+                $('#tablero').css('grid-template-columns','1fr 1fr 1fr 1fr 1fr 1fr');
+            }else if(dificultad == 'Dificil'){
+                tablero.fila = 8;
+                tablero.columna = 8;
+                $('#tablero').css('grid-template-columns','1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr');
+            }
+            
+            casillas = tablero.fila * tablero.columna;
+                
+                
+                for(i=1; i<=casillas; i++){
+                    var bomba = Math.random()*10;
+                    if(bomba <=5){
+                        $('#tablero').append('<div class="casilla"><img class="mina" src="minas.png"></div>');
+                    }else{
+                        $('#tablero').append('<td class="casilla"><img src="Numeros/'+i+'.png"></td>');
+                    }
+                }
+            });
+            
+            $('.casilla').click(function(){
+               alert('perdiste'); 
+            });
+            
+        });
+        
+    </script>
+    </body>    
+</hmtl>

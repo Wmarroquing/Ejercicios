@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <title>Buscador</title>
+</head>
+<body>
+    <div class="container shadow p-5 mb-5 bg-white rounded" style="margin-top: 30px">   
+            <span>Buscar por: </span>        
+            <div class="input-group mb-3">
+                <select id="slc_busqueda" class="form-control" onchange="Busqueda();">
+                    <option value="1">Titulo</option>
+                    <option value="2">Autor</option>
+                    <option value="3">Tema</option>
+                </select>
+                <input type="text" class="form-control" id="txt_busqueda" onkeyup="Busqueda();">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="button" onclick="Busqueda();">Buscar</button>
+                </div>
+            </div>
+        <table class="table text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>Tema</th>
+                    <th>Existencias</th>
+                </tr>
+            </thead>
+            <tbody id="tabla_cuerpo">
+
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="jquery.min.js"></script>
+    <script>
+        var libros = JSON.parse(localStorage.getItem('libros'));
+        var libros_html = "";
+        $.each(libros, function(index, value){
+            libros_html += '<tr>';
+            libros_html += '<td>'+libros[index].libro_id+'</td>';
+            libros_html += '<td>'+libros[index].titulo_libro+'</td>';
+            libros_html += '<td>'+libros[index].autor_libro+'</td>';
+            libros_html += '<td>'+libros[index].tema_libro+'</td>';
+            libros_html += '<td>'+libros[index].existencia+'</td>';
+            libros_html += '</tr>';
+        });
+        $('#tabla_cuerpo').html(libros_html);
+
+
+        function Busqueda(){
+            /*let fila = document.getElementById('tabla_cuerpo');
+            while(fila.rows.length > 0){
+                fila.deleteRow(0);
+            }*/
+            var select = $('#slc_busqueda').val();
+            var busqueda = $('#txt_busqueda').val().toLowerCase();
+
+            if(busqueda.length > 0){
+                libros_html = "";
+                $.each(libros, function(index, value){
+                    if(select == '1'){
+                        if(libros[index].titulo_libro.toLowerCase() == busqueda){
+                            libros_html += '<tr>';
+                            libros_html += '<td>'+libros[index].libro_id+'</td>';
+                            libros_html += '<td>'+libros[index].titulo_libro+'</td>';
+                            libros_html += '<td>'+libros[index].autor_libro+'</td>';
+                            libros_html += '<td>'+libros[index].tema_libro+'</td>';
+                            libros_html += '<td>'+libros[index].existencia+'</td>';
+                            libros_html += '</tr>';
+                        }
+                    }else if(select == '2'){
+                        if(libros[index].autor_libro.toLowerCase() == busqueda){
+                            libros_html += '<tr>';
+                            libros_html += '<td>'+libros[index].libro_id+'</td>';
+                            libros_html += '<td>'+libros[index].titulo_libro+'</td>';
+                            libros_html += '<td>'+libros[index].autor_libro+'</td>';
+                            libros_html += '<td>'+libros[index].tema_libro+'</td>';
+                            libros_html += '<td>'+libros[index].existencia+'</td>';
+                            libros_html += '</tr>';
+                        }
+                    }else if(select == '3'){
+                        if(libros[index].tema_libro.toLowerCase() == busqueda){
+                            libros_html += '<tr>';
+                            libros_html += '<td>'+libros[index].libro_id+'</td>';
+                            libros_html += '<td>'+libros[index].titulo_libro+'</td>';
+                            libros_html += '<td>'+libros[index].autor_libro+'</td>';
+                            libros_html += '<td>'+libros[index].tema_libro+'</td>';
+                            libros_html += '<td>'+libros[index].existencia+'</td>';
+                            libros_html += '</tr>';
+                        }
+                    }
+                });
+                $('#tabla_cuerpo').html(libros_html);
+            }else{
+                libros_html = "";
+                $.each(libros, function(index, value){
+                    libros_html += '<tr>';
+                    libros_html += '<td>'+libros[index].libro_id+'</td>';
+                    libros_html += '<td>'+libros[index].titulo_libro+'</td>';
+                    libros_html += '<td>'+libros[index].autor_libro+'</td>';
+                    libros_html += '<td>'+libros[index].tema_libro+'</td>';
+                    libros_html += '<td>'+libros[index].existencia+'</td>';
+                    libros_html += '</tr>';
+                });
+                $('#tabla_cuerpo').html(libros_html);
+
+            }   
+        }
+    </script>
+</body>
+</html>

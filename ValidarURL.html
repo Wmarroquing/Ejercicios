@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Validar URL</title>
+        <meta charset="utf-8">
+        <style>   
+            form{
+                background: #F8A434;
+                font-family: 'Lato', sans-serif;
+                color: #FDFCFB;
+                text-align: center;
+                height: 150px;
+                width: 350px;
+                text-align: center;
+                padding: 20px;
+                margin: 150px auto;
+                position: relative;
+                box-shadow: 
+                    0px 0px 0px 5px rgba( 255,255,255,0.4 ), 
+                    0px 4px 20px rgba( 0,0,0,0.33 );
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                display: table;
+                position: static;
+            }
+            .formulario{
+                display: flex;
+                align-items: center;
+                margin-bottom: 5px;
+            }
+            .input{
+                height: 44px;
+                border: none;
+            }
+            #txt_url{
+                width: 75%;
+                background: #FDFCFB;
+                font-family: inherit;
+                color: #737373;
+                letter-spacing: 1px;
+                text-indent: 5%;
+                border-radius: 5px 0 0 5px;
+            }
+            #btn_validar{
+                width: 25%;
+                height: 46px;
+                background: #E86C8D;
+                font-family: inherit;
+                font-weight: bold;
+                color: inherit;
+                letter-spacing: 1px;
+                border-radius: 0 5px 5px 0;
+                cursor: pointer;
+                transition: background .3s ease-in-out;
+            }
+            #btn_validar:hover{
+                background: #d45d7d;
+            }
+            input:focus{
+                outline: none;
+                outline: 2px solid #E86C8D;
+                box-shadow: 0 0 2px #E86C8D;
+            }
+            #spn_error{
+                color: inherit;
+                font-family: 'Lato', sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <form method="post" action="">
+            <h1>Validar URL</h1>
+            <div class="formulario">
+                <input type="text" class="input" id="txt_url" placeholder="Ingresa una URL">
+                <input type="button" class="input" id="btn_validar" value="Validar">
+            </div>
+            <span id="spn_error"></span>
+        </form>
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                
+                $('#btn_validar').click(function(){
+                    var url = $('#txt_url').val();
+                    var cadena = /^(https?:\/\/)?(www.)?([\w]+)\.([\w ]{2,6})$/;
+    //    /^https?:\/\/(w){3}\.([a-z]{2,6})([\/\w \.-]*)*\/?$/;
+                    var mensaje = "";
+                    
+                    if(!cadena.test(url)){
+                        mensaje = 'Tu URL es incorrecta ❌';
+                    }else{
+                        mensaje = 'URL correcta ✔';
+                    }
+                    $('#spn_error').html(mensaje);
+                }); 
+            });
+        </script>
+    </body>
+</html>
